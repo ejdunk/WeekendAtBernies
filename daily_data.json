@@ -1,0 +1,15 @@
+{
+  "total_commits": 1,
+  "current_streak": 1,
+  "start_date": "2026-01-01",
+  "last_commit_date": "2026-01-01",
+  "commit_history": [
+    {
+      "date": "2026-01-01",
+      "commit_number": 1,
+      "streak_day": 1,
+      "fact": "A day on Venus is longer than its year",
+      "timestamp": "2026-01-01T13:56:36.397034"
+    }
+  ]
+}
