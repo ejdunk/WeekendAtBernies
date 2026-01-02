@@ -1,15 +1,24 @@
-# WeekendAtBernies 💀 
+# weekend-at-bernies 💀 
 
-A simple Python script that automatically makes daily commits to your GitHub repository to maintain contribution activity and practice automation.
+A simple Python script that automatically makes random daily commits (1-7 per day) to your GitHub repository to maintain contribution activity and practice automation.
 
 ## Features
 
-- **Daily Commits**: Automatically commits once per day with unique messages
+- **Random Daily Commits**: Automatically commits 1-7 times per day with unique messages
+- **Smart Variation**: Never repeats the same number of commits as the previous day
 - **Data Tracking**: Keeps track of commit streaks and statistics in JSON format
 - **Commit Logging**: Maintains a log file of all automated commits
-- **Fun Facts**: Includes random daily facts in the commit data
 - **GitHub Actions**: Automated execution using GitHub Actions workflow
 - **Smart Scheduling**: Won't make duplicate commits on the same day
+
+## Project Files
+
+- `daily_commit.py` - Main automation script
+- `setup.py` - Easy setup and testing script
+- `config.example.py` - Configuration template for customization
+- `.github/workflows/daily-commit.yml` - GitHub Actions workflow
+- `daily_data.json` - Stores commit statistics and history (auto-generated)
+- `commit_log.txt` - Human-readable log of all commits (auto-generated)
 
 ## Files Generated
 
@@ -20,13 +29,18 @@ A simple Python script that automatically makes daily commits to your GitHub rep
 ## Quick Setup
 
 ### Option 1: GitHub Actions (Recommended)
-1. Create a new repository on GitHub
-2. Add the Python script as `daily_commit.py`
-3. Create `.github/workflows/daily-commit.yml` with the workflow file
-4. Push to your repository
+1. Clone or fork this repository
+2. Run the setup script: `python setup.py`
+3. Push to your GitHub repository
+4. Enable GitHub Actions in your repository settings
 5. The script will run daily at 9:00 AM UTC automatically
 
-### Option 2: Local Cron Job
+### Option 2: One-Click Setup
+1. Fork this repository on GitHub
+2. GitHub Actions will automatically start running daily
+3. No additional setup required!
+
+### Option 3: Local Cron Job
 1. Clone your repository locally
 2. Run the script manually: `python daily_commit.py`
 3. Set up a cron job to run it daily:
@@ -49,8 +63,9 @@ python daily_commit.py
 Output example:
 ```
 🚀 Starting daily commit process...
-✅ Successfully committed and pushed: Daily commit #15 - March 15, 2024
-📊 Total commits: 15
+✅ Making 3 commits today (different from yesterday's 5)
+✅ Successfully completed 3 commits - January 02, 2026
+📊 Total commits: 18
 📅 Streak day: 15
 ```
 
@@ -61,13 +76,14 @@ The `daily_data.json` file stores:
 - Current streak counter
 - Start date of the project
 - Last commit date
+- Daily commit counts for variation tracking
 - Recent commit history (last 30 days)
 
 ## Customization Ideas
 
-- Modify the `get_daily_fact()` function to include your own content
 - Change the commit message format
-- Add more data tracking (weather, quotes, etc.)
+- Modify the range of daily commits (currently 1-7)
+- Add more data tracking (timestamps, etc.)
 - Integrate with APIs for dynamic content
 - Add email notifications for milestone streaks
 

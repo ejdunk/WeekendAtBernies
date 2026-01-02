@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-WeekendAtBernies - Daily GitHub Commit Automation
-A script that makes daily commits to maintain GitHub activity.
+weekend-at-bernies - Daily GitHub Commit Automation
+A script that makes 1-7 random daily commits to maintain GitHub activity.
 """
 
 import json
@@ -32,6 +32,7 @@ class DailyCommitter:
             "current_streak": 0,
             "start_date": self.today.isoformat(),
             "last_commit_date": None,
+            "last_commit_count": 0,
             "commit_history": []
         }
     
@@ -40,29 +41,13 @@ class DailyCommitter:
         with open(self.data_file, 'w') as f:
             json.dump(data, f, indent=2)
     
-    def get_daily_fact(self):
-        """Return a random daily fact."""
-        facts = [
-            "Octopuses have three hearts and blue blood",
-            "Honey never spoils - archaeologists have found edible honey in ancient Egyptian tombs",
-            "A group of flamingos is called a 'flamboyance'",
-            "Bananas are berries, but strawberries aren't",
-            "The shortest war in history lasted only 38-45 minutes",
-            "A single cloud can weigh more than a million pounds",
-            "Sharks have been around longer than trees",
-            "The human brain uses about 20% of the body's total energy",
-            "There are more possible games of chess than atoms in the observable universe",
-            "Wombat poop is cube-shaped",
-            "The Great Wall of China isn't visible from space with the naked eye",
-            "A day on Venus is longer than its year",
-            "Dolphins have names for each other",
-            "The inventor of the Pringles can is buried in one",
-            "Cleopatra lived closer in time to the Moon landing than to the construction of the Great Pyramid"
-        ]
-        return random.choice(facts)
+    def get_random_commit_count(self, last_count):
+        """Get a random number of commits (1-7) different from yesterday."""
+        available_counts = [i for i in range(1, 8) if i != last_count]
+        return random.choice(available_counts)
     
     def already_committed_today(self, data):
-        """Check if we've already made a commit today."""
+        """Check if we've already made commits today."""
         return data.get("last_commit_date") == self.today.isoformat()
     
     def run_git_command(self, command):
@@ -79,8 +64,8 @@ class DailyCommitter:
         except subprocess.CalledProcessError as e:
             return False, e.stderr.strip()
     
-    def make_commit(self):
-        """Make the daily commit."""
+    def make_commits(self):
+        """Make the daily commits."""
         print("🚀 Starting daily commit process...")
         
         # Load existing data
@@ -93,9 +78,9 @@ class DailyCommitter:
             print(f"📅 Current streak: {data['current_streak']} days")
             return
         
-        # Update data
-        data["total_commits"] += 1
-        data["last_commit_date"] = self.today.isoformat()
+        # Determine number of commits for today
+        commit_count = self.get_random_commit_count(data.get("last_commit_count", 0))
+        print(f"🎲 Making {commit_count} commits today (different from yesterday's {data.get('last_commit_count', 0)})")
         
         # Update streak
         if data["commit_history"]:
@@ -107,15 +92,55 @@ class DailyCommitter:
         else:
             data["current_streak"] = 1
         
-        # Get daily fact
-        daily_fact = self.get_daily_fact()
+        # Make the commits
+        successful_commits = 0
+        for i in range(commit_count):
+            # Update data for this commit
+            data["total_commits"] += 1
+            
+            # Create commit message
+            if commit_count == 1:
+                commit_msg = f"Daily commit #{data['total_commits']} - {self.today.strftime('%B %d, %Y')}"
+            else:
+                commit_msg = f"Daily commit #{data['total_commits']} ({i+1}/{commit_count}) - {self.today.strftime('%B %d, %Y')}"
+            
+            # Save updated data before each commit
+            data["last_commit_date"] = self.today.isoformat()
+            data["last_commit_count"] = commit_count
+            self.save_data(data)
+            
+            # Log the commit
+            log_entry = f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {commit_msg} | Streak: {data['current_streak']} | Commit {i+1} of {commit_count}\n"
+            with open(self.log_file, 'a') as f:
+                f.write(log_entry)
+            
+            # Git operations
+            success, output = self.run_git_command("git add .")
+            if not success:
+                print(f"❌ Failed to add files for commit {i+1}: {output}")
+                continue
+            
+            success, output = self.run_git_command(f'git commit -m "{commit_msg}"')
+            if not success:
+                print(f"❌ Failed to make commit {i+1}: {output}")
+                continue
+            
+            successful_commits += 1
+            print(f"✅ Commit {i+1}/{commit_count} completed")
         
-        # Create commit entry
+        # Push all commits at once
+        if successful_commits > 0:
+            print("🚀 Pushing all commits to remote...")
+            success, output = self.run_git_command("git push")
+            if not success:
+                print(f"❌ Failed to push commits: {output}")
+                return
+        
+        # Create commit history entry
         commit_entry = {
             "date": self.today.isoformat(),
-            "commit_number": data["total_commits"],
+            "commit_count": successful_commits,
             "streak_day": data["current_streak"],
-            "fact": daily_fact,
             "timestamp": datetime.now().isoformat()
         }
         
@@ -124,46 +149,18 @@ class DailyCommitter:
         if len(data["commit_history"]) > 30:
             data["commit_history"] = data["commit_history"][-30:]
         
-        # Save updated data
+        # Final save
         self.save_data(data)
         
-        # Create commit message
-        commit_msg = f"Daily commit #{data['total_commits']} - {self.today.strftime('%B %d, %Y')}"
-        
-        # Log the commit
-        log_entry = f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {commit_msg} | Streak: {data['current_streak']} | Fact: {daily_fact}\n"
-        with open(self.log_file, 'a') as f:
-            f.write(log_entry)
-        
-        # Git operations
-        print("📝 Adding files to git...")
-        success, output = self.run_git_command("git add .")
-        if not success:
-            print(f"❌ Failed to add files: {output}")
-            return
-        
-        print("💾 Making commit...")
-        success, output = self.run_git_command(f'git commit -m "{commit_msg}"')
-        if not success:
-            print(f"❌ Failed to commit: {output}")
-            return
-        
-        print("🚀 Pushing to remote...")
-        success, output = self.run_git_command("git push")
-        if not success:
-            print(f"❌ Failed to push: {output}")
-            return
-        
         # Success message
-        print(f"✅ Successfully committed and pushed: {commit_msg}")
+        print(f"✅ Successfully completed {successful_commits} commits - {self.today.strftime('%B %d, %Y')}")
         print(f"📊 Total commits: {data['total_commits']}")
         print(f"📅 Streak day: {data['current_streak']}")
-        print(f"💡 Today's fact: {daily_fact}")
 
 def main():
     """Main function."""
     committer = DailyCommitter()
-    committer.make_commit()
+    committer.make_commits()
 
 if __name__ == "__main__":
     main()
