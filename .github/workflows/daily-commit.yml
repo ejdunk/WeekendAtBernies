@@ -1,4 +1,4 @@
-name: Daily Commit Automation
+name: weekend-at-bernies Daily Commits
 
 on:
   schedule:
@@ -27,7 +27,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
     
-    - name: Run daily commit script
+    - name: Run random daily commits script
       run: python daily_commit.py
     
     - name: Display commit status
