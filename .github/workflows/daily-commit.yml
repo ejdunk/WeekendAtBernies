@@ -24,7 +24,7 @@ jobs:
     
     - name: Configure Git
       run: |
-        git config --local user.email "action@github.com"
+        git config --local user.email "88873114+ejdunk@users.noreply.github.com"
         git config --local user.name "GitHub Action"
     
     - name: Run random daily commits script
