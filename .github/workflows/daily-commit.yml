@@ -16,6 +16,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         fetch-depth: 0
+        persist-credentials: true
     
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -28,7 +29,15 @@ jobs:
         git config --local user.name "GitHub Action"
     
     - name: Run random daily commits script
-      run: python daily_commit.py
+      run: |
+        echo "Current date: $(date)"
+        echo "Git status before:"
+        git status
+        python daily_commit.py
+        echo "Git status after:"
+        git status
+        echo "Recent commits:"
+        git log --oneline -3
     
     - name: Commit and push data files
       run: |
