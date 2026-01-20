@@ -30,6 +30,14 @@ jobs:
     - name: Run random daily commits script
       run: python daily_commit.py
     
+    - name: Commit and push data files
+      run: |
+        git add daily_data.json commit_log.txt
+        if ! git diff --staged --quiet; then
+          git commit -m "Update daily commit data files"
+          git push
+        fi
+    
     - name: Display commit status
       run: |
         echo "Latest commits:"
