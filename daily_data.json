@@ -1,6 +1,6 @@
 {
-  "total_commits": 32,
-  "current_streak": 1,
+  "total_commits": 76,
+  "current_streak": 14,
   "start_date": "2026-01-01",
   "last_commit_date": "2026-02-02",
   "commit_history": [
@@ -46,7 +46,85 @@
       "commit_count": 1,
       "streak_day": 1,
       "timestamp": "2026-01-20T15:30:02.738225"
+    },
+    {
+      "date": "2026-01-21",
+      "commit_count": 2,
+      "streak_day": 2,
+      "timestamp": "2026-01-21T09:32:41.237982"
+    },
+    {
+      "date": "2026-01-22",
+      "commit_count": 7,
+      "streak_day": 3,
+      "timestamp": "2026-01-22T09:32:53.445768"
+    },
+    {
+      "date": "2026-01-23",
+      "commit_count": 2,
+      "streak_day": 4,
+      "timestamp": "2026-01-23T09:30:37.324650"
+    },
+    {
+      "date": "2026-01-24",
+      "commit_count": 3,
+      "streak_day": 5,
+      "timestamp": "2026-01-24T09:20:52.266695"
+    },
+    {
+      "date": "2026-01-25",
+      "commit_count": 4,
+      "streak_day": 6,
+      "timestamp": "2026-01-25T09:21:51.603551"
+    },
+    {
+      "date": "2026-01-26",
+      "commit_count": 3,
+      "streak_day": 7,
+      "timestamp": "2026-01-26T09:34:34.147236"
+    },
+    {
+      "date": "2026-01-27",
+      "commit_count": 7,
+      "streak_day": 8,
+      "timestamp": "2026-01-27T09:33:12.233192"
+    },
+    {
+      "date": "2026-01-28",
+      "commit_count": 5,
+      "streak_day": 9,
+      "timestamp": "2026-01-28T09:34:38.031693"
+    },
+    {
+      "date": "2026-01-29",
+      "commit_count": 4,
+      "streak_day": 10,
+      "timestamp": "2026-01-29T09:42:59.229509"
+    },
+    {
+      "date": "2026-01-30",
+      "commit_count": 2,
+      "streak_day": 11,
+      "timestamp": "2026-01-30T09:38:48.065861"
+    },
+    {
+      "date": "2026-01-31",
+      "commit_count": 6,
+      "streak_day": 12,
+      "timestamp": "2026-01-31T09:28:04.172150"
+    },
+    {
+      "date": "2026-02-01",
+      "commit_count": 3,
+      "streak_day": 13,
+      "timestamp": "2026-02-01T09:31:10.330501"
+    },
+    {
+      "date": "2026-02-02",
+      "commit_count": 1,
+      "streak_day": 14,
+      "timestamp": "2026-02-02T09:50:28.657408"
     }
   ],
-  "last_commit_count": 5
+  "last_commit_count": 1
 }
