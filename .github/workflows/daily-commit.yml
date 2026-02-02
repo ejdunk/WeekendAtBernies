@@ -2,8 +2,8 @@ name: weekend-at-bernies Daily Commits
 
 on:
   schedule:
-    # Run daily at 9:00 AM UTC (adjust timezone as needed)
-    - cron: '0 9 * * *'
+    # Run daily at 9:00 AM UTC on weekdays only (Monday=1 to Friday=5)
+    - cron: '0 9 * * 1-5'
   workflow_dispatch: # Allow manual triggering
 
 permissions:

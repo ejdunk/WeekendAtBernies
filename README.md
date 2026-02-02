@@ -1,10 +1,11 @@
 # weekend-at-bernies 💀 
 
-A simple Python script that automatically makes random daily commits (1-7 per day) to your GitHub repository to maintain contribution activity and practice automation.
+A simple Python script that automatically makes random daily commits (1-7 per day) to your GitHub repository to maintain contribution activity and practice automation. Takes weekends off for work-life balance!
 
 ## Features
 
-- **Random Daily Commits**: Automatically commits 1-7 times per day with unique messages
+- **Random Daily Commits**: Automatically commits 1-7 times per day with unique messages (weekdays only)
+- **Weekend Break**: No commits on weekends to maintain work-life balance
 - **Smart Variation**: Never repeats the same number of commits as the previous day
 - **Data Tracking**: Keeps track of commit streaks and statistics in JSON format
 - **Commit Logging**: Maintains a log file of all automated commits

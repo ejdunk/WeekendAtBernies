@@ -64,9 +64,20 @@ class DailyCommitter:
         except subprocess.CalledProcessError as e:
             return False, e.stderr.strip()
     
+    def is_weekend(self):
+        """Check if today is a weekend (Saturday=5, Sunday=6)."""
+        return self.today.weekday() >= 5
+    
     def make_commits(self):
         """Make the daily commits."""
         print("🚀 Starting daily commit process...")
+        
+        # Check if it's a weekend
+        if self.is_weekend():
+            day_name = self.today.strftime('%A')
+            print(f"🏖️ It's {day_name} - no commits on weekends!")
+            print("💤 Taking a break to maintain work-life balance")
+            return
         
         # Load existing data
         data = self.load_data()
