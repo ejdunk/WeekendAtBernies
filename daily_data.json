@@ -5,13 +5,6 @@
   "last_commit_date": "2026-02-13",
   "commit_history": [
     {
-      "date": "2026-01-01",
-      "commit_number": 1,
-      "streak_day": 1,
-      "fact": "A day on Venus is longer than its year",
-      "timestamp": "2026-01-01T13:56:36.397034"
-    },
-    {
       "date": "2026-01-02",
       "commit_count": 5,
       "streak_day": 2,
@@ -184,6 +177,12 @@
       "commit_count": 2,
       "streak_day": 24,
       "timestamp": "2026-02-12T09:50:54.523950"
+    },
+    {
+      "date": "2026-02-13",
+      "commit_count": 5,
+      "streak_day": 25,
+      "timestamp": "2026-02-13T09:43:56.778750"
     }
   ],
   "last_commit_count": 5
