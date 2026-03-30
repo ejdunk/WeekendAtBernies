@@ -1,8 +1,8 @@
 {
-  "total_commits": 253,
-  "current_streak": 5,
+  "total_commits": 254,
+  "current_streak": 1,
   "start_date": "2026-01-01",
-  "last_commit_date": "2026-03-27",
+  "last_commit_date": "2026-03-30",
   "commit_history": [
     {
       "date": "2026-02-18",
@@ -185,5 +185,5 @@
       "timestamp": "2026-03-27T09:54:37.021041"
     }
   ],
-  "last_commit_count": 5
+  "last_commit_count": 4
 }
