@@ -5,12 +5,6 @@
   "last_commit_date": "2026-08-10",
   "commit_history": [
     {
-      "date": "2026-06-29",
-      "commit_count": 2,
-      "streak_day": 1,
-      "timestamp": "2026-06-29T13:05:54.319857"
-    },
-    {
       "date": "2026-06-30",
       "commit_count": 7,
       "streak_day": 2,
@@ -183,6 +177,12 @@
       "commit_count": 3,
       "streak_day": 5,
       "timestamp": "2026-08-07T09:59:55.801423"
+    },
+    {
+      "date": "2026-08-10",
+      "commit_count": 5,
+      "streak_day": 1,
+      "timestamp": "2026-08-10T10:15:03.182519"
     }
   ],
   "last_commit_count": 5
